@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Portfolio — Creative Frontend & 3D Engineer</title>
+  <meta name="description"
+    content="Interactive 3D developer portfolio showcasing projects, skills, and engineering depth. Built with Three.js and modern web technologies." />
+  <meta property="og:title" content="Developer Portfolio — 3D Interactive Experience" />
+  <meta property="og:description" content="Explore projects, skills, and more through an immersive 3D web portfolio." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/overlay.css" />
+  <link rel="stylesheet" href="styles/ui.css" />
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loader">
+    <div class="loader-content">
+      <div class="loader-spinner"></div>
+      <p class="loader-text">Subrato Welcomes You...</p>
+    </div>
+  </div>
+
+  <!-- 3D Canvas Container -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">CodeItAlone<span class="accent">.</span></a>
+    <div class="nav-links">
+      <button class="nav-link active" data-section="0">Home</button>
+      <button class="nav-link" data-section="1">About</button>
+      <button class="nav-link" data-section="2">Skills</button>
+      <button class="nav-link" data-section="3">Projects</button>
+      <button class="nav-link" data-section="4">Contact</button>
+    </div>
+    <button id="reduced-motion-toggle" title="Toggle reduced motion" aria-label="Toggle reduced motion">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M8 12h8" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Section Indicators (right side dots) -->
+  <div id="section-indicators">
+    <button class="indicator active" data-section="0" title="Home"></button>
+    <button class="indicator" data-section="1" title="About"></button>
+    <button class="indicator" data-section="2" title="Skills"></button>
+    <button class="indicator" data-section="3" title="Projects"></button>
+    <button class="indicator" data-section="4" title="Contact"></button>
+  </div>
+
+  <!-- HTML Overlays -->
+  <div id="overlay-container">
+    <!-- Hero Overlay -->
+    <section id="hero-overlay" class="overlay-section active">
+      <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Subrato<span class="accent">Kundu</span></h1>
+        <p class="hero-role">Full-Stack Developer </p>
+        <p class="hero-tagline">I build immersive digital experiences that bridge design and engineering.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary" data-section="3">View Projects</a>
+          <a href="#" class="btn btn-outline" data-section="4">Get in Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- About Overlay -->
+    <section id="about-overlay" class="overlay-section">
+      <div class="section-label">About Me</div>
+      <div class="about-card glass-card">
+        <h2>Crafting the Future of the Web</h2>
+        <p>
+          I'm a developer passionate about pushing the boundaries of what's possible on the web.
+          With expertise spanning frontend frameworks, backend systems, and 3D graphics,
+          I build performant applications that feel alive. When I'm not coding, I'm exploring
+          new technologies and contributing to open-source projects.
+        </p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-number">1+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">8+</span>
+            <span class="stat-label">Projects Built</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Overlay -->
+    <section id="skills-overlay" class="overlay-section">
+      <div class="section-label">Skills & Expertise</div>
+      <div class="skills-container">
+        <div class="skill-category glass-card">
+          <h3><span class="category-icon">⚡</span> Frontend</h3>
+          <div class="skill-tags" id="frontend-skills"></div>
+        </div>
+        <div class="skill-category glass-card">
+          <h3><span class="category-icon">🔧</span> Backend</h3>
+          <div class="skill-tags" id="backend-skills"></div>
+        </div>
+        <div class="skill-category glass-card">
+          <h3><span class="category-icon">🛠️</span> Tools</h3>
+          <div class="skill-tags" id="tools-skills"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Overlay -->
+    <section id="projects-overlay" class="overlay-section">
+      <div class="section-label">Featured Projects</div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </section>
+
+    <!-- Contact Overlay -->
+    <section id="contact-overlay" class="overlay-section">
+      <div class="section-label">Let's Connect</div>
+      <div class="contact-card glass-card">
+        <h2>Got a project in mind?</h2>
+        <p>I'm always open to discussing new opportunities and interesting projects.</p>
+        <div class="contact-links">
+          <a href="https://github.com/" target="_blank" rel="noopener" class="contact-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a href="www.linkedin.com/in/subrato-kundu" target="_blank" rel="noopener" class="contact-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:subrato213432@gmail.com" class="contact-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Project Modal -->
+  <div id="project-modal" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal-content glass-card">
+      <button id="modal-close" class="modal-close" aria-label="Close modal">&times;</button>
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+      <div id="modal-stack" class="modal-stack"></div>
+      <div class="modal-links">
+        <a id="modal-github" href="#" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
+          GitHub
+        </a>
+        <a id="modal-live" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+          Live Demo →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Noscript fallback -->
+  <noscript>
+    <div
+      style="padding:2rem;text-align:center;font-family:sans-serif;color:#e0e0e0;background:#0a0a0f;min-height:100vh;">
+      <h1>Subrato Kundu — Developer Portfolio</h1>
+      <p>Full-Stack Developer & 3D Web Engineer</p>
+      <p>Please enable JavaScript to experience the interactive 3D portfolio.</p>
+    </div>
+  </noscript>
+
+  <!-- Scripts (ES Modules via CDN) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+      "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.4/index.js"
+    }
+  }
+  </script>
+  <script type="module" src="js/data.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
