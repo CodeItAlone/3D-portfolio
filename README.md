@@ -9,7 +9,7 @@
 
 A stunning, immersive developer portfolio built with **Three.js** — featuring a Milky Way galaxy, an orbiting solar system, glassmorphism UI, and scroll-driven camera navigation that takes you on a journey through space.
 
-> **[Live Demo →](#)** · **[Report Bug →](https://github.com/CodeItAlone/PORTFOLIO/issues)** · **[Request Feature →](https://github.com/CodeItAlone/PORTFOLIO/issues)**
+> **[Live Demo →](https://portfolio.subratokundu.in/)** · **[Report Bug →](https://github.com/CodeItAlone/PORTFOLIO/issues)** · **[Request Feature →](https://github.com/CodeItAlone/PORTFOLIO/issues)**
 
 ---
 
