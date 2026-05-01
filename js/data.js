@@ -14,7 +14,7 @@ export const skills = {
     { name: 'Tailwind CSS', level: 'Advanced' },
   ],
   backend: [
-    { name: 'Node.js', level: 'Advanced' },
+    { name: 'Spring Boot', level: 'Intermediate' },
     { name: 'Express', level: 'Advanced' },
     { name: 'Python', level: 'Intermediate' },
     { name: 'Java', level: 'Intermediate' },
@@ -39,11 +39,18 @@ export const skills = {
 
 export const projects = [
   {
+    title: 'Student Connect',
+    description: 'Student Connect is a trusted, all-in-one college ecosystem platform designed to bridge the gap between students, colleges, and the wider academic community. Students today miss clubs, overlook opportunities, cannot find mentors, and have no single place to learn and collaborate.',
+    stack: ['Next.js', 'Tailwind CSS', 'SpringBoot', 'PostgreSQL', 'Spring Security', 'Spring Data JPA', 'JWT'],
+    githubUrl: 'https://github.com/CodeItAlone/Students-Connect',
+    liveUrl: 'https://students-connect.vercel.app/',
+  },
+  {
     title: '3D Portfolio',
     description: 'An interactive 3D portfolio experience built with Three.js featuring scroll-based navigation, dynamic lighting, and glassmorphism UI. The portfolio you\'re currently viewing!',
     stack: ['Three.js', 'GSAP', 'JavaScript', 'CSS3'],
     githubUrl: 'https://github.com/',
-    liveUrl: '#',
+    liveUrl: 'https://portfolio.subratokundu.in/',
   },
   {
     title: 'Writing On Air',
@@ -64,7 +71,7 @@ export const projects = [
     description: 'A modern, full-stack CRUD note-taking application built with Next.js, MongoDB, and Tailwind CSS.',
     stack: ['Next.js', 'MongoDB', 'Tailwind CSS'],
     githubUrl: 'https://github.com/CodeItAlone/My-Notes',
-    liveUrl: 'https://example.com',
+    liveUrl: 'https://my-notes-nine-beryl.vercel.app/',
   },
   // {
   //   title: 'Chat Application',
